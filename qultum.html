@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Ramadan Kareem</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        /* Logo styles - Updated for larger logo */
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            max-height: 80px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #5CB338;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #5CB338;
+        }
+
+        nav ul li a.active {
+            color: #5CB338;
+            font-weight: 700;
+        }
+
+        /* Content section */
+        .content {
+            min-height: 80vh;
+            padding: 40px 0;
+        }
+
+        .content h1 {
+            font-size: 48px;
+            font-weight: bold;
+            color: #5CB338;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Jadwal Qultum styles */
+        .qultum-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .qultum-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .qultum-header h2 {
+            color: #5CB338;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .qultum-header p {
+            color: #666;
+            font-size: 18px;
+        }
+
+        .search-container {
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #5CB338;
+            border-radius: 30px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus {
+            border-color: #5CB338;
+            box-shadow: 0 0 8px rgba(232, 62, 140, 0.3);
+        }
+
+        .qultum-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .qultum-table th, .qultum-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .qultum-table th {
+            background-color: #f8f1f5;
+            color: #5CB338;
+            font-weight: 600;
+        }
+
+        .qultum-table tr:hover {
+            background-color: #f8f1f5;
+        }
+
+        .qultum-table tr.highlight {
+            background-color: #fcebf4;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 20px;
+            color: #5CB338;
+            font-weight: 500;
+            display: none;
+        }
+
+        /* Hamburger menu for mobile */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: #5CB338;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Media queries for responsiveness */
+        @media screen and (max-width: 768px) {
+            .content h1 {
+                font-size: 36px;
+            }
+
+            /* Updated logo size for mobile */
+            .logo img {
+                max-height: 60px;
+            }
+
+            nav {
+                position: absolute;
+                right: 0;
+                top: 90px;
+                background-color: white;
+                width: 100%;
+                border-radius: 10px;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+                transform: translateY(-150%);
+                transition: transform 0.5s ease;
+                z-index: 100;
+            }
+
+            nav.active {
+                transform: translateY(0%);
+            }
+
+            nav ul {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+                text-align: center;
+            }
+
+            .hamburger {
+                display: block;
+            }
+            
+            .qultum-table th, .qultum-table td {
+                padding: 8px 10px;
+                font-size: 14px;
+            }
+            
+            .qultum-container {
+                padding: 15px;
+            }
+        }
+
+        /* Animation for hamburger menu */
+        .toggle .line1 {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .toggle .line2 {
+            opacity: 0;
+        }
+
+        .toggle .line3 {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <!-- Logo area - now with image tag instead of text -->
+                <img src="./gambar/reismart logo.png" alt="Your Company Logo">
+            </div>
+            
+            <div class="hamburger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="Jadwal Takjil.html">JADWAL TAKJIL</a></li>
+                    <li><a href="sahur.html">JADWAL SAHUR</a></li>
+                    <li><a href="qultum.html">JADWAL QULTUM</a></li>
+                    <li><a href="piket.html">JADWAL PIKET</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="content">
+            
+            <div class="qultum-container">
+                <div class="qultum-header">
+                    <h2>JADWAL KULTUM SUBUH RAMADHAN 1446 H</h2>
+                    <p>MASJID AR RUUM TAJI PRAMBANAN</p>
+                </div>
+                
+                <div class="search-container">
+                    <input type="text" id="searchBox" class="search-box" placeholder="Cari nama pemateri kultum...">
+                </div>
+                
+                <div id="noResults" class="no-results">
+                    Tidak ada hasil yang sesuai dengan pencarian Anda.
+                </div>
+                
+                <table class="qultum-table" id="qultumTable">
+                    <thead>
+                        <tr>
+                            <th>NO</th>
+                            <th>TANGGAL</th>
+                            <th>HARI</th>
+                            <th>NAMA</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>1 Maret 2025</td>
+                            <td>Sabtu</td>
+                            <td>Bp. H. Wiyana S.E.</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>2 Maret 2025</td>
+                            <td>Minggu</td>
+                            <td>Bp.Prof. H. Edy Purwanto, M,Pd.</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>3 Maret 2025</td>
+                            <td>Senin</td>
+                            <td>Ust Tegalrejo</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>4 Maret 2025</td>
+                            <td>Selasa</td>
+                            <td>Bp. H. Subandiyo, S.Pd.</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>5 Maret 2025</td>
+                            <td>Rabu</td>
+                            <td>Bp. Sarbilan</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>6 Maret 2025</td>
+                            <td>Kamis</td>
+                            <td>Reismart</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>7 Maret 2025</td>
+                            <td>Jumat</td>
+                            <td>Bp. Abu Maksum</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>8 Maret 2025</td>
+                            <td>Sabtu</td>
+                            <td>Bp. H. Wiyana S.E.</td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>9 Maret 2025</td>
+                            <td>Minggu</td>
+                            <td>Bp.Prof. H. Edy Purwanto, M,Pd.</td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>10 Maret 2025</td>
+                            <td>Senin</td>
+                            <td>Ust Tegalrejo</td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td>11 Maret 2025</td>
+                            <td>Selasa</td>
+                            <td>Bp. H. Subandiyo, S.Pd.</td>
+                        </tr>
+                        <tr>
+                            <td>12</td>
+                            <td>12 Maret 2025</td>
+                            <td>Rabu</td>
+                            <td>Bp. Sarbilan</td>
+                        </tr>
+                        <tr>
+                            <td>13</td>
+                            <td>13 Maret 2025</td>
+                            <td>Kamis</td>
+                            <td>Reismart</td>
+                        </tr>
+                        <tr>
+                            <td>14</td>
+                            <td>14 Maret 2025</td>
+                            <td>Jumat</td>
+                            <td>Bp. Abu Maksum</td>
+                        </tr>
+                        <tr>
+                            <td>15</td>
+                            <td>15 Maret 2025</td>
+                            <td>Sabtu</td>
+                            <td>Bp. H. Wiyana S.E.</td>
+                        </tr>
+                        <tr>
+                            <td>16</td>
+                            <td>16 Maret 2025</td>
+                            <td>Minggu</td>
+                            <td>Bp.Prof. H. Edy Purwanto, M,Pd.</td>
+                        </tr>
+                        <tr>
+                            <td>17</td>
+                            <td>17 Maret 2025</td>
+                            <td>Senin</td>
+                            <td>Ust Tegalrejo</td>
+                        </tr>
+                        <tr>
+                            <td>18</td>
+                            <td>18 Maret 2025</td>
+                            <td>Selasa</td>
+                            <td>Bp. H. Subandiyo, S.Pd.</td>
+                        </tr>
+                        <tr>
+                            <td>19</td>
+                            <td>19 Maret 2025</td>
+                            <td>Rabu</td>
+                            <td>Bp. Sarbilan</td>
+                        </tr>
+                        <tr>
+                            <td>20</td>
+                            <td>20 Maret 2025</td>
+                            <td>Kamis</td>
+                            <td>Reismart</td>
+                        </tr>
+                        <tr>
+                            <td>21</td>
+                            <td>21 Maret 2025</td>
+                            <td>Jumat</td>
+                            <td>Bp. Abu Maksum</td>
+                        </tr>
+                        <tr>
+                            <td>22</td>
+                            <td>22 Maret 2025</td>
+                            <td>Sabtu</td>
+                            <td>Bp. H. Wiyana S.E.</td>
+                        </tr>
+                        <tr>
+                            <td>23</td>
+                            <td>23 Maret 2025</td>
+                            <td>Minggu</td>
+                            <td>Bp.Prof. H. Edy Purwanto, M,Pd.</td>
+                        </tr>
+                        <tr>
+                            <td>24</td>
+                            <td>24 Maret 2025</td>
+                            <td>Senin</td>
+                            <td>Ust Tegalrejo</td>
+                        </tr>
+                        <tr>
+                            <td>25</td>
+                            <td>25 Maret 2025</td>
+                            <td>Selasa</td>
+                            <td>Bp. H. Subandiyo, S.Pd.</td>
+                        </tr>
+                        <tr>
+                            <td>26</td>
+                            <td>26 Maret 2025</td>
+                            <td>Rabu</td>
+                            <td>Bp. Sarbilan</td>
+                        </tr>
+                        <tr>
+                            <td>27</td>
+                            <td>27 Maret 2025</td>
+                            <td>Kamis</td>
+                            <td>Reismart</td>
+                        </tr>
+                        <tr>
+                            <td>28</td>
+                            <td>28 Maret 2025</td>
+                            <td>Jumat</td>
+                            <td>Bp. Abu Maksum</td>
+                        </tr>
+                        <tr>
+                            <td>29</td>
+                            <td>29 Maret 2025</td>
+                            <td>Sabtu</td>
+                            <td>Bp. H. Wiyana S.E.</td>
+                        </tr>
+                        <tr>
+                            <td>30</td>
+                            <td>30 Maret 2025</td>
+                            <td>Minggu</td>
+                            <td>Bp.Prof. H. Edy Purwanto, M,Pd.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Hamburger menu functionality
+            const hamburger = document.querySelector('.hamburger');
+            const nav = document.querySelector('nav');
+            
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('toggle');
+                nav.classList.toggle('active');
+            });
+            
+            // Search functionality
+            const searchBox = document.getElementById('searchBox');
+            const table = document.getElementById('qultumTable');
+            const rows = table.getElementsByTagName('tr');
+            const noResults = document.getElementById('noResults');
+            
+            searchBox.addEventListener('keyup', function() {
+                const searchText = searchBox.value.toLowerCase();
+                let resultsFound = false;
+                
+                // Start from 1 to skip the header row
+                for (let i = 1; i < rows.length; i++) {
+                    const row = rows[i];
+                    const cells = row.getElementsByTagName('td');
+                    let foundMatch = false;
+                    
+                    for (let j = 0; j < cells.length; j++) {
+                        const cellText = cells[j].textContent.toLowerCase();
+                        
+                        if (cellText.indexOf(searchText) > -1) {
+                            foundMatch = true;
+                            break;
+                        }
+                    }
+                    
+                    if (foundMatch) {
+                        row.style.display = '';
+                        if (searchText) {
+                            row.classList.add('highlight');
+                        } else {
+                            row.classList.remove('highlight');
+                        }
+                        resultsFound = true;
+                    } else {
+                        row.style.display = 'none';
+                        row.classList.remove('highlight');
+                    }
+                }
+                
+                // Show or hide "no results" message
+                if (!resultsFound && searchText) {
+                    noResults.style.display = 'block';
+                } else {
+                    noResults.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

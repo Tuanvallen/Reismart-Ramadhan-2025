@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jadwal Sahur - Ramadan Kareem</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        /* Logo styles - Updated for larger logo */
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            max-height: 80px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #5CB338;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #5CB338;
+        }
+
+        nav ul li a.active {
+            color: #5CB338;
+            font-weight: 700;
+        }
+
+        /* Content section */
+        .content {
+            min-height: 80vh;
+            padding: 40px 0;
+        }
+
+        .content h1 {
+            font-size: 48px;
+            font-weight: bold;
+            color: #5CB338;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .content h2 {
+            font-size: 24px;
+            color: #555;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* Search box styles */
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .search-box {
+            width: 100%;
+            max-width: 500px;
+            padding: 12px 20px;
+            border: 2px solid #5CB338;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus {
+            border-color: #5CB338;
+            box-shadow: 0 0 8px rgba(232, 62, 140, 0.4);
+        }
+
+        /* Table styles */
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .schedule-table th, .schedule-table td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .schedule-table th {
+            background-color: #5CB338;
+            color: white;
+            font-weight: 600;
+        }
+
+        .schedule-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .schedule-table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Highlight search results */
+        .highlight {
+            background-color: #ffeb3b;
+            padding: 2px 0;
+        }
+
+        /* Contact info styles */
+        .contact-info {
+            margin-top: 30px;
+            text-align: center;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+        }
+
+        .contact-info h3 {
+            color: #5CB338;
+            margin-bottom: 10px;
+        }
+
+        .contact-info p {
+            color: #555;
+        }
+
+        /* Edit button styles */
+        .btn-edit {
+            background-color: #5CB338;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-edit:hover {
+            background-color: #5CB338;
+        }
+
+        /* Phone input field */
+        .phone-input {
+            width: 100%;
+            padding: 6px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        /* Hamburger menu for mobile */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: #5CB338;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Responsive styles */
+        @media screen and (max-width: 768px) {
+            .content h1 {
+                font-size: 36px;
+            }
+
+            .content h2 {
+                font-size: 20px;
+            }
+
+            /* Updated logo size for mobile */
+            .logo img {
+                max-height: 60px;
+            }
+
+            nav {
+                position: absolute;
+                right: 0;
+                top: 90px;
+                background-color: white;
+                width: 100%;
+                border-radius: 10px;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+                transform: translateY(-150%);
+                transition: transform 0.5s ease;
+                z-index: 100;
+            }
+
+            nav.active {
+                transform: translateY(0%);
+            }
+
+            nav ul {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+                text-align: center;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .schedule-table th, .schedule-table td {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+
+            .schedule-table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+        }
+
+        /* Animation for hamburger menu */
+        .toggle .line1 {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .toggle .line2 {
+            opacity: 0;
+        }
+
+        .toggle .line3 {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        /* No results message */
+        .no-results {
+            text-align: center;
+            color: #e83e8c;
+            font-size: 18px;
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <!-- Logo area - now with image tag instead of text -->
+                <img src="./gambar/reismart logo.png" alt="Logo Masjid Ar-Rumm">
+            </div>
+            
+            <div class="hamburger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="Jadwal Takjil.html">JADWAL TAKJIL</a></li>
+                    <li><a href="sahur.html">JADWAL SAHUR</a></li>
+                    <li><a href="qultum.html">JADWAL QULTUM</a></li>
+                    <li><a href="piket.html">JADWAL PIKET</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="content">
+            <h1>Jadwal Pemberi Makan Sahur</h1>
+            <h2>Ramadhan 1445 H / 2024 M - Masjid Ar-Ruum</h2>
+            
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-box" placeholder="Cari nama pemberi makan sahur...">
+            </div>
+
+            <div id="noResults" class="no-results">
+                Tidak ada hasil yang ditemukan.
+            </div>
+            
+            <table class="schedule-table" id="scheduleTable">
+                <thead>
+                    <tr>
+                        <th>NO</th>
+                        <th>NAMA</th>
+                        <th>TANGGAL</th>
+                        <th>HARI</th>
+                        <th>NOMOR HP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Bp. H. Wiyono</td>
+                        <td>1 Maret 2025</td>
+                        <td>Sabtu</td>
+                        <td><a href="https://api.whatsapp.com/send/?phone=08122715259&text&type=phone_number&app_absent=0">Klik untuk nomor</a></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Bp. Susilo Widodo</td>
+                        <td>2 Maret 2025</td>
+                        <td>Minggu</td>
+                        <td><a href="https://api.whatsapp.com/send/?phone=%2B6281353655775&text&type=phone_number&app_absent=0">Klik untuk nomor</a></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Bp. Heru Edy Yulianto</td>
+                        <td>3 Maret 2025</td>
+                        <td>Senin</td>
+                        <td><a href="https://api.whatsapp.com/send/?phone=%2B6281329264785&text&type=phone_number&app_absent=0">Klik untuk nomor</a></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Bu Alfiah</td>
+                        <td>4 Maret 2025</td>
+                        <td>Selasa</td>
+                        <td><a href="https://api.whatsapp.com/send/?phone=%2B6288983391084&text&type=phone_number&app_absent=0">Klik untuk nomor</a></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Bp. Imam Rofii</td>
+                        <td>5 Maret 2025</td>
+                        <td>Rabu</td>
+                        <td><a href="https://api.whatsapp.com/send/?phone=%2B6281221753502&text&type=phone_number&app_absent=0">Klik untuk nomor</a></td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Bp Ndradi</td>
+                        <td>6 Maret 2025</td>
+                        <td>Kamis</td>
+                        <td><a href="https://api.whatsapp.com/send/?phone=%2B628991333285&text&type=phone_number&app_absent=0">Klik untuk nomor</a></td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Bp. Warsono</td>
+                        <td>7 Maret 2025</td>
+                        <td>Jumat</td>
+                        <td><a href="https://api.whatsapp.com/send/?phone=%2B6281392425588&text&type=phone_number&app_absent=0">Klik untuk nomor</a></td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>Bp. Subandiyo</td>
+                        <td>8 Maret 2025</td>
+                        <td>Sabtu</td>
+                        <td><a href="https://api.whatsapp.com/send/?phone=%2B6281328744922&text&type=phone_number&app_absent=0">Klik untuk nomor</a></td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>Bp. Sarbilan</td>
+                        <td>9 Maret 2025</td>
+                        <td>Minggu</td>
+                        <td><a href="https://api.whatsapp.com/send/?phone=%2B6281229204617&text&type=phone_number&app_absent=0">Klik untuk nomor</a></td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>Bp. Joko Santoso</td>
+                        <td>10 Maret 2025</td>
+                        <td>Senin</td>
+                        <td><a href="https://api.whatsapp.com/send/?phone=%2B6287834927507&text&type=phone_number&app_absent=0">Klik untuk nomor</a></td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>Bp. Sujadi</td>
+                        <td>11 Maret 2025</td>
+                        <td>Selasa</td>
+                        <td><a href="https://api.whatsapp.com/send/?phone=%2B6289648913001&text&type=phone_number&app_absent=0">Klik untuk nomor</a></td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>Bp. Prof. H. Edy Purwanto</td>
+                        <td>12 Maret 2025</td>
+                        <td>Rabu</td>
+                        <td><a href="https://api.whatsapp.com/send/?phone=%2B628156887036&text&type=phone_number&app_absent=0">Klik untuk nomor</a></td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>Ibu Sri Supadmi</td>
+                        <td>13 Maret 2025</td>
+                        <td>Kamis</td>
+                        <td><a href="https://api.whatsapp.com/send/?phone=%2B628156887036&text&type=phone_number&app_absent=0">Klik untuk nomor</a></td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td>Bp. Sri Usodo</td>
+                        <td>14 Maret 2025</td>
+                        <td>Jumat</td>
+                        <td><a href="https://api.whatsapp.com/send/?phone=%2B62895602930238&text&type=phone_number&app_absent=0">Klik untuk nomor</a></td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>Bp. Supardi</td>
+                        <td>15 Maret 2025</td>
+                        <td>Sabtu</td>
+                        <td><a href="https://api.whatsapp.com/send/?phone=%2B62895383155610&text&type=phone_number&app_absent=0">Klik untuk nomor</a></td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td>Bp. H. Amin Raharjo</td>
+                        <td>16 Maret 2025</td>
+                        <td>Minggu</td>
+                        <td><a href="https://api.whatsapp.com/send/?phone=%2B6282134930347&text&type=phone_number&app_absent=0">Klik untuk nomor</a></td>
+                    </tr>
+                    <tr>
+                        <td>17</td>
+                        <td>Bp. Hermawan Esti</td>
+                        <td>17 Maret 2025</td>
+                        <td>Senin</td>
+                        <td><a href="https://api.whatsapp.com/send/?phone=%2B6281325154345&text&type=phone_number&app_absent=0">Klik untuk nomor</a></td>
+                    </tr>
+                    <tr>
+                        <td>18</td>
+                        <td>Ibu Endang Kasino</td>
+                        <td>18 Maret 2025</td>
+                        <td>Selasa</td>
+                        <td><a href="https://api.whatsapp.com/send/?phone=%2B6287803881991&text&type=phone_number&app_absent=0">Klik untuk nomor</a></td>
+                    </tr>
+                    <tr>
+                        <td>19</td>
+                        <td>Ibu Ismoyo</td>
+                        <td>19 Maret 2025</td>
+                        <td>Rabu</td>
+                        <td><a href="https://api.whatsapp.com/send/?phone=%2B6281328771682&text&type=phone_number&app_absent=0">Klik untuk nomor</a></td>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td>Bp Gino</td>
+                        <td>20 Maret 2025</td>
+                        <td>Kamis</td>
+                        <td><a href="https://api.whatsapp.com/send/?phone=%2B6287734628556&text&type=phone_number&app_absent=0">Klik untuk nomor</a></td>
+                    </tr>
+                    <tr>
+                        <td>21</td>
+                        <td>Ibu Tri Sudarmi</td>
+                        <td>21 Maret 2025</td>
+                        <td>Jumat</td>
+                        <td><a href="https://api.whatsapp.com/send/?phone=%2B6282314482840&text&type=phone_number&app_absent=0">Klik untuk nomor</a></td>
+                    </tr>
+                    <tr>
+                        <td>22</td>
+                        <td>Bp. Herman Sadikin</td>
+                        <td>22 Maret 2025</td>
+                        <td>Sabtu</td>
+                        <td><a href="https://api.whatsapp.com/send/?phone=%2B6282217442769&text&type=phone_number&app_absent=0">Klik untuk nomor</a></td>
+                    </tr>
+                    <tr>
+                        <td>23</td>
+                        <td>Bp. Tarwoco</td>
+                        <td>23 Maret 2025</td>
+                        <td>Minggu</td>
+                        <td><a href="https://api.whatsapp.com/send/?phone=%2B6282157056663&text&type=phone_number&app_absent=0">Klik untuk nomor</a></td>
+                    </tr>
+                    <tr>
+                        <td>24</td>
+                        <td>Bp. Koko Yudhianto</td>
+                        <td>24 Maret 2025</td>
+                        <td>Senin</td>
+                        <td><a href="https://api.whatsapp.com/send/?phone=%2B6283867778800&text&type=phone_number&app_absent=0">Klik untuk nomor</a></td>
+                    </tr>
+                    <tr>
+                        <td>25</td>
+                        <td>Ibu Siti Sumadi</td>
+                        <td>25 Maret 2025</td>
+                        <td>Selasa</td>
+                        <td><a href="https://api.whatsapp.com/send/?phone=%2B6285878783595&text&type=phone_number&app_absent=0">Klik untuk nomor</a></td>
+                    </tr>
+                    <tr>
+                        <td>26</td>
+                        <td>Ibu Margono</td>
+                        <td>26 Maret 2025</td>
+                        <td>Rabu</td>
+                        <td><a href="https://api.whatsapp.com/send/?phone=%2B6281392241342&text&type=phone_number&app_absent=0">Klik untuk nomor</a></td>
+                    </tr>
+                    <tr>
+                        <td>27</td>
+                        <td>Ibu Ardaneswari</td>
+                        <td>27 Maret 2025</td>
+                        <td>Kamis</td>
+                        <td><a href="https://api.whatsapp.com/send/?phone=%2B6289618010111&text&type=phone_number&app_absent=0">Klik untuk nomor</a></td>
+                    </tr>
+                    <tr>
+                        <td>28</td>
+                        <td>Bp. Bejo</td>
+                        <td>28 Maret 2025</td>
+                        <td>Jumat</td>
+                        <td><a href="https://api.whatsapp.com/send/?phone=%2B6289620594467&text&type=phone_number&app_absent=0">Klik untuk nomor</a></td>
+                    </tr>
+                    <tr>
+                        <td>29</td>
+                        <td>Bp Agung</td>
+                        <td>29 Maret 2025</td>
+                        <td>Sabtu</td>
+                        <td><a href="https://api.whatsapp.com/send/?phone=%2B6283866622682&text&type=phone_number&app_absent=0">Klik untuk nomor</a></td>
+                    </tr>
+                    <tr>
+                        <td>30</td>
+                        <td>Bp. Rohmad</td>
+                        <td>30 Maret 2025</td>
+                        <td>Minggu</td>
+                        <td><a href="https://api.whatsapp.com/send/?phone=%2B6288902854187&text&type=phone_number&app_absent=0">Klik untuk nomor</a></td>
+                    </tr>
+                    <tr>
+                        <td>31</td>
+                        <td>Ibui Sri Siswanto Suwignyo</td>
+                        <td>1 Maret 2025</td>
+                        <td>Sabtu</td>
+                        <td><a href="https://api.whatsapp.com/send/?phone=%2B6281215113069&text&type=phone_number&app_absent=0">Klik untuk nomor</a></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="contact-info">
+                <h3>Seksi Sahur:</h3>
+                <p>Faisal: 087752285103</p>
+                <p>Denta: 083849269914</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Hamburger menu functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburger = document.querySelector('.hamburger');
+            const nav = document.querySelector('nav');
+            
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('toggle');
+                nav.classList.toggle('active');
+            });
+
+            // Search functionality
+            const searchInput = document.getElementById('searchInput');
+            const scheduleTable = document.getElementById('scheduleTable');
+            const tableRows = scheduleTable.getElementsByTagName('tr');
+            const noResults = document.getElementById('noResults');
+            
+            searchInput.addEventListener('keyup', function() {
+                const searchTerm = this.value.toLowerCase();
+                let resultsFound = false;
+                
+                // Start from index 1 to skip the header row
+                for (let i = 1; i < tableRows.length; i++) {
+                    const row = tableRows[i];
+                    const cells = row.getElementsByTagName('td');
+                    let rowMatchesSearch = false;
+                    
+                    for (let j = 0; j < cells.length - 1; j++) { // Skip the last cell (input field)
+                        const cell = cells[j];
+                        const cellText = cell.textContent.toLowerCase();
+                        
+                        // Check if cell contains search term
+                        if (cellText.includes(searchTerm)) {
+                            rowMatchesSearch = true;
+                            
+                            // Highlight matching text
+                            if (searchTerm.length > 0) {
+                                // Create regex to match the search term with case insensitivity
+                                const regex = new RegExp(`(${searchTerm})`, 'gi');
+                                cell.innerHTML = cell.textContent.replace(regex, '<span class="highlight">$1</span>');
+                            } else {
+                                cell.innerHTML = cell.textContent;
+                            }
+                        } else if (searchTerm.length === 0) {
+                            // Remove highlight when search is cleared
+                            cell.innerHTML = cell.textContent;
+                        }
+                    }
+                    
+                    // Show/hide row based on search match
+                    if (rowMatchesSearch || searchTerm === '') {
+                        row.style.display = '';
+                        resultsFound = true;
+                    } else {
+                        row.style.display = 'none';
+                    }
+                }
+                
+                // Show/hide "No results" message
+                if (!resultsFound && searchTerm !== '') {
+                    noResults.style.display = 'block';
+                } else {
+                    noResults.style.display = 'none';
+                }
+            });
+            
+            // Save phone numbers to localStorage when changed
+            const phoneInputs = document.querySelectorAll('.phone-input');
+            phoneInputs.forEach((input, index) => {
+                // Load saved phone number if exists
+                const savedPhone = localStorage.getItem(`sahurPhone_${index}`);
+                if (savedPhone) {
+                    input.value = savedPhone;
+                }
+                
+                // Save phone number when changed
+                input.addEventListener('change', function() {
+                    localStorage.setItem(`sahurPhone_${index}`, this.value);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
