@@ -46,6 +46,8 @@
             color: var(--text-light);
             transition: background-color 0.3s ease, color 0.3s ease;
             min-height: 100vh;
+            overflow-x: hidden;
+            width: 100%;
         }
 
         body.dark-mode {
@@ -81,15 +83,15 @@
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 15px;
         }
 
-        /* Header Styles */
+        /* Header Styles - Improved for mobile */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
+            padding: 10px 0;
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -104,38 +106,58 @@
         }
 
         .logo img {
-            max-height: 60px;
+            max-height: 45px;
             width: auto;
             transition: all 0.3s ease;
         }
 
         @media (min-width: 768px) {
             .logo img {
-                max-height: 80px;
+                max-height: 60px;
             }
         }
 
-        /* Navigation */
+        /* Navigation - Mobile First */
         .nav-menu {
-            display: flex;
-            align-items: center;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 85%;
+            max-width: 320px;
+            height: 100vh;
+            background-color: var(--bg-light);
+            box-shadow: -5px 0 30px rgba(0,0,0,0.2);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            padding: 70px 20px 20px;
+            overflow-y: auto;
+        }
+
+        body.dark-mode .nav-menu {
+            background-color: var(--card-dark);
+        }
+
+        .nav-menu.active {
+            right: 0;
         }
 
         .nav-list {
             display: flex;
+            flex-direction: column;
             list-style: none;
-            gap: 20px;
+            gap: 10px;
         }
 
         .nav-list li a {
             text-decoration: none;
             color: var(--text-light);
             font-weight: 500;
-            font-size: 14px;
-            padding: 8px 12px;
-            border-radius: 8px;
+            font-size: 16px;
+            padding: 12px 15px;
+            border-radius: 10px;
             transition: all 0.3s ease;
             position: relative;
+            display: block;
         }
 
         body.dark-mode .nav-list li a {
@@ -148,23 +170,16 @@
             background-color: rgba(43, 122, 75, 0.1);
         }
 
-        .nav-list li a.active::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 50%;
-            transform: translateX(-50%);
+        .nav-list li a i {
+            margin-right: 10px;
             width: 20px;
-            height: 3px;
-            background: var(--primary);
-            border-radius: 3px;
         }
 
         /* Header Actions */
         .header-actions {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
         }
 
         .theme-toggle {
@@ -184,10 +199,11 @@
         }
 
         .hamburger {
-            display: none;
+            display: flex;
             flex-direction: column;
             cursor: pointer;
             z-index: 1001;
+            padding: 5px;
         }
 
         .hamburger div {
@@ -211,57 +227,17 @@
             transform: rotate(45deg) translate(-5px, -6px);
         }
 
-        /* Mobile Navigation */
-        @media screen and (max-width: 768px) {
-            .nav-menu {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 80%;
-                max-width: 300px;
-                height: 100vh;
-                background-color: var(--bg-light);
-                box-shadow: -5px 0 30px rgba(0,0,0,0.2);
-                transition: right 0.3s ease;
-                z-index: 1000;
-                padding: 80px 20px 20px;
-            }
-
-            body.dark-mode .nav-menu {
-                background-color: var(--card-dark);
-            }
-
-            .nav-menu.active {
-                right: 0;
-            }
-
-            .nav-list {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .nav-list li a {
-                display: block;
-                padding: 12px;
-                font-size: 16px;
-            }
-
-            .hamburger {
-                display: flex;
-            }
-        }
-
-        /* Hero Section */
+        /* Hero Section - Mobile Optimized */
         .hero {
-            min-height: 60vh;
+            min-height: 50vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             position: relative;
             overflow: hidden;
-            border-radius: 0 0 30px 30px;
-            margin-bottom: 40px;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 30px;
         }
 
         .hero-background {
@@ -274,7 +250,6 @@
             background-position: center;
             background-repeat: no-repeat;
             z-index: -2;
-            transition: background-image 0.3s ease;
         }
 
         .hero-overlay {
@@ -283,7 +258,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(43, 122, 75, 0.9) 0%, rgba(196, 154, 108, 0.9) 100%);
+            background: linear-gradient(135deg, rgba(43, 122, 75, 0.95) 0%, rgba(196, 154, 108, 0.95) 100%);
             z-index: -1;
         }
 
@@ -291,33 +266,521 @@
             position: relative;
             z-index: 1;
             color: white;
-            padding: 40px 20px;
+            padding: 30px 15px;
             max-width: 800px;
         }
 
         .hero h1 {
-            font-size: 2.5rem;
+            font-size: 1.8rem;
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            line-height: 1.3;
+        }
+
+        @media (min-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
         }
 
         .hero p {
-            font-size: 1.1rem;
-            margin-bottom: 30px;
+            font-size: 1rem;
+            margin-bottom: 20px;
             opacity: 0.9;
+            line-height: 1.6;
         }
 
         .hero-date {
             display: inline-block;
             background-color: rgba(255,255,255,0.2);
-            padding: 8px 20px;
+            padding: 8px 15px;
             border-radius: 30px;
             font-weight: 500;
             backdrop-filter: blur(5px);
+            font-size: 0.9rem;
         }
 
-        /* Admin Panel - Hanya untuk backend */
+        /* Stats Cards - Mobile Grid */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: -20px 15px 30px;
+            position: relative;
+            z-index: 10;
+        }
+
+        @media (min-width: 768px) {
+            .stats-container {
+                grid-template-columns: repeat(4, 1fr);
+                margin: -30px 20px 40px;
+            }
+        }
+
+        .stat-card {
+            background-color: var(--card-light);
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: var(--shadow-light);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card i {
+            font-size: 24px;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .stat-card .stat-value {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+
+        .stat-card .stat-label {
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        /* Section Title */
+        .section-title {
+            text-align: center;
+            margin: 30px 0 20px;
+        }
+
+        .section-title h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+            padding: 0 15px;
+        }
+
+        @media (min-width: 768px) {
+            .section-title h2 {
+                font-size: 28px;
+            }
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 15px;
+            font-size: 14px;
+        }
+
+        /* Schedule Cards - Mobile Grid */
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (min-width: 768px) {
+            .schedule-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 25px;
+                margin: 30px 0;
+            }
+        }
+
+        .schedule-card {
+            background-color: var(--card-light);
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: var(--shadow-light);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .schedule-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gradient-ramadan);
+        }
+
+        .schedule-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+
+        .schedule-icon i {
+            font-size: 22px;
+            color: white;
+        }
+
+        .schedule-card h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .schedule-card .schedule-count {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 3px;
+        }
+
+        .schedule-card .schedule-desc {
+            color: var(--gray);
+            font-size: 11px;
+            line-height: 1.3;
+        }
+
+        @media (min-width: 768px) {
+            .schedule-card {
+                padding: 25px;
+            }
+            .schedule-icon {
+                width: 60px;
+                height: 60px;
+            }
+            .schedule-icon i {
+                font-size: 30px;
+            }
+            .schedule-card h3 {
+                font-size: 20px;
+            }
+            .schedule-card .schedule-count {
+                font-size: 32px;
+            }
+            .schedule-card .schedule-desc {
+                font-size: 14px;
+            }
+        }
+
+        /* Filter Tabs - Mobile Scrollable */
+        .filter-tabs {
+            display: flex;
+            overflow-x: auto;
+            gap: 8px;
+            padding: 10px 0 15px;
+            margin: 0 -15px;
+            padding-left: 15px;
+            padding-right: 15px;
+            scrollbar-width: thin;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .filter-tabs::-webkit-scrollbar {
+            height: 3px;
+        }
+
+        .filter-tabs::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 3px;
+        }
+
+        .filter-tab {
+            padding: 8px 15px;
+            background: none;
+            border: 1px solid var(--border-light);
+            border-radius: 25px;
+            color: var(--text-light);
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .filter-tab {
+            border-color: var(--border-dark);
+            color: var(--text-dark);
+        }
+
+        .filter-tab.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Table Styles - Mobile Optimized */
+        .table-container {
+            overflow-x: auto;
+            margin: 20px -15px;
+            border-radius: 0;
+            box-shadow: none;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .schedule-table {
+            width: 100%;
+            min-width: 650px;
+            border-collapse: collapse;
+            background-color: var(--card-light);
+            font-size: 13px;
+        }
+
+        @media (min-width: 768px) {
+            .table-container {
+                margin: 30px 0;
+                border-radius: 15px;
+                box-shadow: var(--shadow-light);
+            }
+            .schedule-table {
+                min-width: 100%;
+                font-size: 14px;
+            }
+        }
+
+        .schedule-table th {
+            background: var(--primary);
+            color: white;
+            padding: 12px 8px;
+            font-weight: 600;
+            text-align: left;
+            font-size: 13px;
+        }
+
+        .schedule-table td {
+            padding: 10px 8px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .schedule-table td a {
+            word-break: break-word;
+            font-size: 12px;
+        }
+
+        /* Search Box - Mobile Optimized */
+        .search-section {
+            margin: 20px 0;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background-color: var(--card-light);
+            border-radius: 30px;
+            padding: 3px 3px 3px 15px;
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--border-light);
+        }
+
+        .search-box i {
+            color: var(--primary);
+            font-size: 16px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 12px 8px;
+            border: none;
+            background: none;
+            outline: none;
+            font-size: 14px;
+            min-width: 0;
+        }
+
+        .search-box button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        .search-box button i {
+            color: white;
+            margin-right: 5px;
+        }
+
+        /* Cultum Split - Mobile Stack */
+        .cultum-split {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (min-width: 768px) {
+            .cultum-split {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+                margin: 20px 0;
+            }
+        }
+
+        .cultum-card {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+            border-radius: 15px;
+            padding: 15px;
+            color: white;
+        }
+
+        .cultum-card h4 {
+            font-size: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cultum-card ul {
+            list-style: none;
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        .cultum-card li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        /* Modal - Mobile Optimized */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+            padding: 15px;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: var(--bg-light);
+            border-radius: 20px;
+            padding: 20px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--gray);
+            line-height: 1;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+            padding-right: 30px;
+        }
+
+        /* Notes Section - Mobile */
+        .notes-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+            font-size: 13px;
+        }
+
+        .notes-section h3 {
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .notes-section p {
+            margin: 5px 0;
+            color: var(--gray);
+            line-height: 1.5;
+        }
+
+        /* Footer - Mobile */
+        footer {
+            margin-top: 40px;
+            padding: 30px 0;
+            background-color: #F8F9FA;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-text {
+            text-align: center;
+            color: var(--gray);
+            font-size: 12px;
+            padding: 0 15px;
+        }
+
+        .footer-text p {
+            margin: 5px 0;
+        }
+
+        /* Utility Classes */
+        .text-primary { color: var(--primary); }
+        .text-center { text-align: center; }
+        .mt-4 { margin-top: 30px; }
+        .mb-4 { margin-bottom: 30px; }
+        .hide { display: none !important; }
+
+        /* Highlight for search */
+        .highlight {
+            background-color: rgba(255, 193, 7, 0.3);
+            font-weight: 600;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+
+        /* Admin Panel - Hanya ikon gear di kanan bawah */
         .admin-panel {
             position: fixed;
             bottom: 20px;
@@ -333,13 +796,17 @@
             color: white;
             border: none;
             cursor: pointer;
-            font-size: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            font-size: 22px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .admin-toggle:hover {
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(90deg);
+            background: var(--primary-dark);
         }
 
         .admin-menu {
@@ -347,9 +814,9 @@
             bottom: 60px;
             right: 0;
             background: white;
-            border-radius: 10px;
-            padding: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
             display: none;
             min-width: 200px;
         }
@@ -365,391 +832,41 @@
 
         .admin-menu button {
             width: 100%;
-            padding: 10px;
+            padding: 12px 15px;
             margin: 5px 0;
             border: none;
             background: var(--primary);
             color: white;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .admin-menu button:hover {
-            background: var(--primary-dark);
-        }
-
-        #bgFileInput {
-            display: none;
-        }
-
-        /* Stats Cards */
-        .stats-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            margin: -30px 20px 40px;
-            position: relative;
-            z-index: 10;
-        }
-
-        .stat-card {
-            background-color: var(--card-light);
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
-            box-shadow: var(--shadow-light);
-            transition: all 0.3s ease;
-        }
-
-        body.dark-mode .stat-card {
-            background-color: var(--card-dark);
-            box-shadow: var(--shadow-dark);
-        }
-
-        .stat-card i {
-            font-size: 30px;
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-
-        .stat-card .stat-value {
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .stat-card .stat-label {
             font-size: 14px;
-            color: var(--gray);
-        }
-
-        /* Section Title */
-        .section-title {
-            text-align: center;
-            margin: 40px 0 30px;
-        }
-
-        .section-title h2 {
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-
-        .section-title p {
-            color: var(--gray);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Schedule Cards */
-        .schedule-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin: 30px 0;
-        }
-
-        .schedule-card {
-            background-color: var(--card-light);
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: var(--shadow-light);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        body.dark-mode .schedule-card {
-            background-color: var(--card-dark);
-            box-shadow: var(--shadow-dark);
-        }
-
-        .schedule-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-        }
-
-        .schedule-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 5px;
-            height: 100%;
-            background: var(--gradient-ramadan);
-        }
-
-        .schedule-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-
-        .schedule-icon i {
-            font-size: 30px;
-            color: white;
-        }
-
-        .schedule-card h3 {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .schedule-card .schedule-count {
-            font-size: 32px;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 5px;
-        }
-
-        .schedule-card .schedule-desc {
-            color: var(--gray);
-            font-size: 14px;
-        }
-
-        /* Table Styles */
-        .table-container {
-            overflow-x: auto;
-            margin: 30px 0;
-            border-radius: 15px;
-            box-shadow: var(--shadow-light);
-        }
-
-        .schedule-table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: var(--card-light);
-        }
-
-        body.dark-mode .schedule-table {
-            background-color: var(--card-dark);
-        }
-
-        .schedule-table th {
-            background: var(--primary);
-            color: white;
-            padding: 15px;
-            font-weight: 600;
             text-align: left;
-        }
-
-        .schedule-table td {
-            padding: 12px 15px;
-            border-bottom: 1px solid var(--border-light);
-        }
-
-        body.dark-mode .schedule-table td {
-            border-bottom-color: var(--border-dark);
-        }
-
-        .schedule-table tr:hover {
-            background-color: rgba(43, 122, 75, 0.05);
-        }
-
-        .schedule-table a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
             transition: all 0.3s ease;
-        }
-
-        .schedule-table a:hover {
-            color: var(--primary-dark);
-            text-decoration: underline;
-        }
-
-        .highlight {
-            background-color: rgba(255, 193, 7, 0.3);
-            font-weight: 600;
-        }
-
-        /* Search Box */
-        .search-section {
-            margin: 30px 0;
-        }
-
-        .search-box {
-            display: flex;
-            align-items: center;
-            background-color: var(--card-light);
-            border-radius: 50px;
-            padding: 5px 20px;
-            box-shadow: var(--shadow-light);
-            border: 1px solid var(--border-light);
-        }
-
-        .search-box i {
-            color: var(--primary);
-            font-size: 18px;
-        }
-
-        .search-box input {
-            flex: 1;
-            padding: 15px;
-            border: none;
-            background: none;
-            outline: none;
-            font-size: 16px;
-        }
-
-        .search-box button {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .search-box button:hover {
-            background: var(--primary-dark);
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            z-index: 2000;
-            backdrop-filter: blur(5px);
-        }
-
-        .modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background-color: var(--bg-light);
-            border-radius: 20px;
-            padding: 30px;
-            max-width: 600px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-            position: relative;
-        }
-
-        body.dark-mode .modal-content {
-            background-color: var(--card-dark);
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: var(--gray);
-        }
-
-        .modal-title {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-
-        /* Cultum Split Styles */
-        .cultum-split {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin: 20px 0;
-        }
-
-        .cultum-card {
-            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
-            border-radius: 15px;
-            padding: 20px;
-            color: white;
-        }
-
-        .cultum-card h4 {
-            font-size: 18px;
-            margin-bottom: 10px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .cultum-card ul {
-            list-style: none;
-            max-height: 400px;
-            overflow-y: auto;
-        }
-
-        .cultum-card li {
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-            font-size: 14px;
-        }
-
-        /* Footer */
-        footer {
-            margin-top: 60px;
-            padding: 40px 0;
-            background-color: #F8F9FA;
-            transition: background-color 0.3s ease;
-        }
-
-        body.dark-mode footer {
-            background-color: #1A1A1A;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .social-links a {
-            width: 45px;
-            height: 45px;
-            background: var(--primary);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            transform: translateY(-5px);
+        .admin-menu button:hover {
             background: var(--primary-dark);
+            transform: translateX(5px);
         }
 
-        .footer-text {
-            text-align: center;
-            color: var(--gray);
-            font-size: 14px;
+        .admin-menu button i {
+            width: 20px;
+            font-size: 16px;
+        }
+
+        /* Hidden file input */
+        #bgFileInput {
+            display: none;
         }
 
         /* Loading Animation */
         .loading {
             display: inline-block;
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             border: 3px solid rgba(43, 122, 75, 0.3);
             border-radius: 50%;
             border-top-color: var(--primary);
@@ -759,43 +876,13 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
-
-        /* Notes Section */
-        .notes-section {
-            margin: 30px 0;
-            padding: 20px;
-            background-color: #f8f9fa;
-            border-radius: 10px;
-            border-left: 5px solid var(--primary);
-        }
-
-        body.dark-mode .notes-section {
-            background-color: var(--card-dark);
-        }
-
-        .notes-section h3 {
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-
-        .notes-section p {
-            margin: 5px 0;
-            color: var(--gray);
-        }
-
-        /* Utility Classes */
-        .text-primary { color: var(--primary); }
-        .text-center { text-align: center; }
-        .mt-4 { margin-top: 40px; }
-        .mb-4 { margin-bottom: 40px; }
-        .hide { display: none !important; }
     </style>
 </head>
 <body>
-    <!-- Hidden file input for background change (backend only) -->
+    <!-- Hidden file input for background change (disembunyikan) -->
     <input type="file" id="bgFileInput" accept="image/*">
 
-    <!-- Admin Panel (untuk backend) -->
+    <!-- Admin Panel - Hanya ikon gear di kanan bawah -->
     <div class="admin-panel">
         <button class="admin-toggle" onclick="toggleAdminMenu()">
             <i class="fas fa-cog"></i>
@@ -869,13 +956,13 @@
                     </div>
                     <div class="stat-card">
                         <i class="fas fa-book-open"></i>
-                        <div class="stat-value">30</div>
-                        <div class="stat-label">Kultum Subuh</div>
+                        <div class="stat-value">60</div>
+                        <div class="stat-label">Kultum</div>
                     </div>
                     <div class="stat-card">
                         <i class="fas fa-star"></i>
-                        <div class="stat-value">30</div>
-                        <div class="stat-label">Kultum Tarawih</div>
+                        <div class="stat-value">56</div>
+                        <div class="stat-label">Anggota Piket</div>
                     </div>
                 </div>
 
@@ -927,14 +1014,14 @@
             <!-- Takjil Section -->
             <section id="takjil" class="section">
                 <div class="section-title">
-                    <h2>Jadwal Takjil Ramadhan 1447 H / 2026 M</h2>
+                    <h2>Jadwal Takjil Ramadhan 1447 H</h2>
                     <p>Masjid AR-RUUM Taji Prambanan</p>
                 </div>
 
                 <div class="search-section">
                     <div class="search-box">
                         <i class="fas fa-search"></i>
-                        <input type="text" id="takjilSearch" placeholder="Cari nama pemberi takjil...">
+                        <input type="text" id="takjilSearch" placeholder="Cari berdasarkan tanggal...">
                         <button onclick="searchTakjil()"><i class="fas fa-search"></i> Cari</button>
                     </div>
                 </div>
@@ -947,9 +1034,9 @@
                 </div>
 
                 <div id="takjilResults" class="table-container"></div>
-                <div id="takjilNoResults" class="text-center" style="display: none; padding: 40px;">
-                    <i class="fas fa-search" style="font-size: 48px; color: var(--gray);"></i>
-                    <p style="margin-top: 20px;">Tidak ada hasil yang ditemukan</p>
+                <div id="takjilNoResults" class="text-center" style="display: none; padding: 30px;">
+                    <i class="fas fa-search" style="font-size: 40px; color: var(--gray);"></i>
+                    <p style="margin-top: 15px;">Tidak ada hasil yang ditemukan untuk tanggal tersebut</p>
                 </div>
 
                 <div class="notes-section">
@@ -959,11 +1046,10 @@
                     <p>• Minuman disediakan dalam gelas atau teh dalam jumbo</p>
                     <p>• Setiap kelompok wajib memberikan tambahan makanan berat sejumlah 1 porsi untuk santri</p>
                     <p>• Jumlah santri: 120 Orang</p>
-                    <p>• Apabila puasa ramadhan jatuh pada tanggal 19 Februari maka kelompok pentakjil pada tanggal 18 Februari akan berubah urutan menjadi kelompok takjil terakhir (tanggal 4 Maret)</p>
                 </div>
             </section>
 
-            <!-- Sahur Section - DIBUAT LANGSUNG DI HTML DENGAN LINK wa.me/ -->
+            <!-- Sahur Section -->
             <section id="sahur" class="section">
                 <div class="section-title">
                     <h2>Jadwal Pemberi Makan Sahur</h2>
@@ -973,7 +1059,7 @@
                 <div class="search-section">
                     <div class="search-box">
                         <i class="fas fa-search"></i>
-                        <input type="text" id="sahurSearch" placeholder="Cari nama pemberi sahur..." onkeyup="searchSahur()">
+                        <input type="text" id="sahurSearch" placeholder="Cari berdasarkan tanggal..." onkeyup="searchSahur()">
                         <button onclick="searchSahur()"><i class="fas fa-search"></i> Cari</button>
                     </div>
                 </div>
@@ -995,232 +1081,232 @@
                                 <td>Bp. Herman Sadikin</td>
                                 <td>18 Februari 2026</td>
                                 <td>Rabu</td>
-                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6282217442769&text&type=phone_number&app_absent=0" target="_blank">Klik untuk nomor</a></td>
+                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6282217442769" target="_blank">Klik WA</a></td>
                             </tr>
                             <tr>
                                 <td>2</td>
                                 <td>Ibu Tri Sudarmi</td>
                                 <td>19 Februari 2026</td>
                                 <td>Kamis</td>
-                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6282314482840&text&type=phone_number&app_absent=0" target="_blank">Klik untuk nomor</a></td>
+                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6282314482840" target="_blank">Klik WA</a></td>
                             </tr>
                             <tr>
                                 <td>3</td>
                                 <td>Bp. H. Wiyana, S.E.</td>
                                 <td>20 Februari 2026</td>
                                 <td>Jumat</td>
-                                <td><a href="https://api.whatsapp.com/send/?phone=%2B628122715259&text&type=phone_number&app_absent=0" target="_blank">Klik untuk nomor</a></td>
+                                <td><a href="https://api.whatsapp.com/send/?phone=%2B628122715259" target="_blank">Klik WA</a></td>
                             </tr>
                             <tr>
                                 <td>4</td>
                                 <td>Ibu Atun Imam</td>
                                 <td>21 Februari 2026</td>
                                 <td>Sabtu</td>
-                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6285326262449&text&type=phone_number&app_absent=0" target="_blank">Klik untuk nomor</a></td>
+                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6285326262449" target="_blank">Klik WA</a></td>
                             </tr>
                             <tr>
                                 <td>5</td>
                                 <td>Ibu Iput</td>
                                 <td>22 Februari 2026</td>
                                 <td>Minggu</td>
-                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6289913332856&text&type=phone_number&app_absent=0" target="_blank">Klik untuk nomor</a></td>
+                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6289913332856" target="_blank">Klik WA</a></td>
                             </tr>
                             <tr>
                                 <td>6</td>
                                 <td>Ibu Wiwit Edy</td>
                                 <td>23 Februari 2026</td>
                                 <td>Senin</td>
-                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6281329264785&text&type=phone_number&app_absent=0" target="_blank">Klik untuk nomor</a></td>
+                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6281329264785" target="_blank">Klik WA</a></td>
                             </tr>
                             <tr>
                                 <td>7</td>
                                 <td>Ibu Tanti</td>
                                 <td>24 Februari 2026</td>
                                 <td>Selasa</td>
-                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6281314807101&text&type=phone_number&app_absent=0" target="_blank">Klik untuk nomor</a></td>
+                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6281314807101" target="_blank">Klik WA</a></td>
                             </tr>
                             <tr>
                                 <td>8</td>
                                 <td>Bp. Tarwoco</td>
                                 <td>25 Februari 2026</td>
                                 <td>Rabu</td>
-                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6282157056663&text&type=phone_number&app_absent=0" target="_blank">Klik untuk nomor</a></td>
+                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6282157056663" target="_blank">Klik WA</a></td>
                             </tr>
                             <tr>
                                 <td>9</td>
                                 <td>Bp. Gino</td>
                                 <td>26 Februari 2026</td>
                                 <td>Kamis</td>
-                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6287734628556&text&type=phone_number&app_absent=0" target="_blank">Klik untuk nomor</a></td>
+                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6287734628556" target="_blank">Klik WA</a></td>
                             </tr>
                             <tr>
                                 <td>10</td>
                                 <td>Ibu Ismoyo</td>
                                 <td>27 Februari 2026</td>
                                 <td>Jumat</td>
-                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6281328771682&text&type=phone_number&app_absent=0" target="_blank">Klik untuk nomor</a></td>
+                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6281328771682" target="_blank">Klik WA</a></td>
                             </tr>
                             <tr>
                                 <td>11</td>
                                 <td>Bp. Joko Santoso</td>
                                 <td>28 Februari 2026</td>
                                 <td>Sabtu</td>
-                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6287834927507&text&type=phone_number&app_absent=0" target="_blank">Klik untuk nomor</a></td>
+                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6287834927507" target="_blank">Klik WA</a></td>
                             </tr>
                             <tr>
                                 <td>12</td>
                                 <td>Bp. Sarbilan, S.E.</td>
                                 <td>1 Maret 2026</td>
                                 <td>Minggu</td>
-                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6281229204617&text&type=phone_number&app_absent=0" target="_blank">Klik untuk nomor</a></td>
+                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6281229204617" target="_blank">Klik WA</a></td>
                             </tr>
                             <tr>
                                 <td>13</td>
                                 <td>Bp. Supardi</td>
                                 <td>2 Maret 2026</td>
                                 <td>Senin</td>
-                                <td><a href="https://api.whatsapp.com/send/?phone=%2B62895383155610&text&type=phone_number&app_absent=0" target="_blank">Klik untuk nomor</a></td>
+                                <td><a href="https://api.whatsapp.com/send/?phone=%2B62895383155610" target="_blank">Klik WA</a></td>
                             </tr>
                             <tr>
                                 <td>14</td>
                                 <td>Bp. Prof. H. Edi Purwanta, M.Pd.</td>
                                 <td>3 Maret 2026</td>
                                 <td>Selasa</td>
-                                <td><a href="https://api.whatsapp.com/send/?phone=%2B62816681078&text&type=phone_number&app_absent=0" target="_blank">Klik untuk nomor</a></td>
+                                <td><a href="https://api.whatsapp.com/send/?phone=%2B62816681078" target="_blank">Klik WA</a></td>
                             </tr>
                             <tr>
                                 <td>15</td>
                                 <td>Ibu Sri Supadmi</td>
                                 <td>4 Maret 2026</td>
                                 <td>Rabu</td>
-                                <td><a href="https://api.whatsapp.com/send/?phone=%2B628156887036&text&type=phone_number&app_absent=0" target="_blank">Klik untuk nomor</a></td>
+                                <td><a href="https://api.whatsapp.com/send/?phone=%2B628156887036" target="_blank">Klik WA</a></td>
                             </tr>
                             <tr>
                                 <td>16</td>
                                 <td>Bp. Subandiyo</td>
                                 <td>5 Maret 2026</td>
                                 <td>Kamis</td>
-                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6281328744922&text&type=phone_number&app_absent=0" target="_blank">Klik untuk nomor</a></td>
+                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6281328744922" target="_blank">Klik WA</a></td>
                             </tr>
                             <tr>
                                 <td>17</td>
                                 <td>Ibu Wasiyah</td>
                                 <td>6 Maret 2026</td>
                                 <td>Jumat</td>
-                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6282134930347&text&type=phone_number&app_absent=0" target="_blank">Klik untuk nomor</a></td>
+                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6282134930347" target="_blank">Klik WA</a></td>
                             </tr>
                             <tr>
                                 <td>18</td>
                                 <td>Bp. Sri Usodo</td>
                                 <td>7 Maret 2026</td>
                                 <td>Sabtu</td>
-                                <td><a href="https://api.whatsapp.com/send/?phone=%2B62895602930238&text&type=phone_number&app_absent=0" target="_blank">Klik untuk nomor</a></td>
+                                <td><a href="https://api.whatsapp.com/send/?phone=%2B62895602930238" target="_blank">Klik WA</a></td>
                             </tr>
                             <tr>
                                 <td>19</td>
                                 <td>Ibu Sri Siswanti</td>
                                 <td>8 Maret 2026</td>
                                 <td>Minggu</td>
-                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6281215113069&text&type=phone_number&app_absent=0" target="_blank">Klik untuk nomor</a></td>
+                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6281215113069" target="_blank">Klik WA</a></td>
                             </tr>
                             <tr>
                                 <td>20</td>
                                 <td>Ibu Alfiah</td>
                                 <td>9 Maret 2026</td>
                                 <td>Senin</td>
-                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6288983391084&text&type=phone_number&app_absent=0" target="_blank">Klik untuk nomor</a></td>
+                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6288983391084" target="_blank">Klik WA</a></td>
                             </tr>
                             <tr>
                                 <td>21</td>
                                 <td>Ibu Dayu</td>
                                 <td>10 Maret 2026</td>
                                 <td>Selasa</td>
-                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6282137526046&text&type=phone_number&app_absent=0" target="_blank">Klik untuk nomor</a></td>
+                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6282137526046" target="_blank">Klik WA</a></td>
                             </tr>
                             <tr>
                                 <td>22</td>
                                 <td>Bp. Susilo Widodo</td>
                                 <td>11 Maret 2026</td>
                                 <td>Rabu</td>
-                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6281353655775&text&type=phone_number&app_absent=0" target="_blank">Klik untuk nomor</a></td>
+                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6281353655775" target="_blank">Klik WA</a></td>
                             </tr>
                             <tr>
                                 <td>23</td>
                                 <td>Bp. Warsono</td>
                                 <td>12 Maret 2026</td>
                                 <td>Kamis</td>
-                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6281392425588&text&type=phone_number&app_absent=0" target="_blank">Klik untuk nomor</a></td>
+                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6281392425588" target="_blank">Klik WA</a></td>
                             </tr>
                             <tr>
                                 <td>24</td>
                                 <td>Ibu Endang Kasino</td>
                                 <td>13 Maret 2026</td>
                                 <td>Jumat</td>
-                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6287803881991&text&type=phone_number&app_absent=0" target="_blank">Klik untuk nomor</a></td>
+                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6287803881991" target="_blank">Klik WA</a></td>
                             </tr>
                             <tr>
                                 <td>25</td>
                                 <td>Ibu Ardaneswari</td>
                                 <td>14 Maret 2026</td>
                                 <td>Sabtu</td>
-                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6289618010111&text&type=phone_number&app_absent=0" target="_blank">Klik untuk nomor</a></td>
+                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6289618010111" target="_blank">Klik WA</a></td>
                             </tr>
                             <tr>
                                 <td>26</td>
                                 <td>Bp. Bejo</td>
                                 <td>15 Maret 2026</td>
                                 <td>Minggu</td>
-                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6289620594467&text&type=phone_number&app_absent=0" target="_blank">Klik untuk nomor</a></td>
+                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6289620594467" target="_blank">Klik WA</a></td>
                             </tr>
                             <tr>
                                 <td>27</td>
                                 <td>Ibu Siti Sumadi</td>
                                 <td>16 Maret 2026</td>
                                 <td>Senin</td>
-                                <td><a href="" target="_blank">Klik untuk nomor</a></td>
+                                <td><a href="#" target="_blank">Klik WA</a></td>
                             </tr>
                             <tr>
                                 <td>28</td>
                                 <td>Bp. Rasya</td>
                                 <td>17 Maret 2026</td>
                                 <td>Selasa</td>
-                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6287721051577&text&type=phone_number&app_absent=0" target="_blank">Klik untuk nomor</a></td>
+                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6287721051577" target="_blank">Klik WA</a></td>
                             </tr>
                             <tr>
                                 <td>29</td>
                                 <td>Bp. Wondo</td>
                                 <td>18 Maret 2026</td>
                                 <td>Rabu</td>
-                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6282241138830&text&type=phone_number&app_absent=0" target="_blank">Klik untuk nomor</a></td>
+                                <td><a href="https://api.whatsapp.com/send/?phone=%2B6282241138830" target="_blank">Klik WA</a></td>
                             </tr>
                             <tr>
                                 <td>30</td>
                                 <td>Ibu Hj. Sri Suharni</td>
                                 <td>19 Maret 2026</td>
                                 <td>Kamis</td>
-                                <td><a href="" target="_blank">Klik untuk nomor</a></td>
+                                <td><a href="#" target="_blank">Klik WA</a></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 
-                <div id="sahurNoResults" class="text-center" style="display: none; padding: 40px;">
-                    <i class="fas fa-search" style="font-size: 48px; color: var(--gray);"></i>
-                    <p style="margin-top: 20px;">Tidak ada hasil yang ditemukan</p>
+                <div id="sahurNoResults" class="text-center" style="display: none; padding: 30px;">
+                    <i class="fas fa-search" style="font-size: 40px; color: var(--gray);"></i>
+                    <p style="margin-top: 15px;">Tidak ada jadwal sahur untuk tanggal tersebut</p>
                 </div>
             </section>
 
             <!-- Cultum Section -->
             <section id="cultum" class="section">
                 <div class="section-title">
-                    <h2>Jadwal Kultum Ramadhan 1447 H / 2026 M</h2>
+                    <h2>Jadwal Kultum Ramadhan 1447 H</h2>
                     <p>Masjid AR-RUUM Taji Prambanan</p>
                 </div>
 
                 <div class="search-section">
                     <div class="search-box">
                         <i class="fas fa-search"></i>
-                        <input type="text" id="cultumSearch" placeholder="Cari pemateri kultum...">
+                        <input type="text" id="cultumSearch" placeholder="Cari berdasarkan tanggal...">
                         <button onclick="searchCultum()"><i class="fas fa-search"></i> Cari</button>
                     </div>
                 </div>
@@ -1242,10 +1328,9 @@
                     </div>
                 </div>
 
-                <div id="cultumResults" class="table-container" style="display: none;"></div>
-                <div id="cultumNoResults" class="text-center" style="display: none; padding: 40px;">
-                    <i class="fas fa-search" style="font-size: 48px; color: var(--gray);"></i>
-                    <p style="margin-top: 20px;">Tidak ada hasil yang ditemukan</p>
+                <div id="cultumNoResults" class="text-center" style="display: none; padding: 30px;">
+                    <i class="fas fa-search" style="font-size: 40px; color: var(--gray);"></i>
+                    <p style="margin-top: 15px;">Tidak ada jadwal kultum untuk tanggal tersebut</p>
                 </div>
             </section>
 
@@ -1259,15 +1344,15 @@
                 <div class="search-section">
                     <div class="search-box">
                         <i class="fas fa-search"></i>
-                        <input type="text" id="piketSearch" placeholder="Cari nama anggota piket...">
+                        <input type="text" id="piketSearch" placeholder="Cari berdasarkan hari...">
                         <button onclick="searchPiket()"><i class="fas fa-search"></i> Cari</button>
                     </div>
                 </div>
 
                 <div id="piketResults" class="table-container"></div>
-                <div id="piketNoResults" class="text-center" style="display: none; padding: 40px;">
-                    <i class="fas fa-search" style="font-size: 48px; color: var(--gray);"></i>
-                    <p style="margin-top: 20px;">Tidak ada hasil yang ditemukan</p>
+                <div id="piketNoResults" class="text-center" style="display: none; padding: 30px;">
+                    <i class="fas fa-search" style="font-size: 40px; color: var(--gray);"></i>
+                    <p style="margin-top: 15px;">Tidak ada jadwal piket untuk hari tersebut</p>
                 </div>
             </section>
         </main>
@@ -1282,8 +1367,8 @@
                 <a href="https://www.instagram.com/pemudatajihijrah" target="_blank"><i class="fab fa-instagram"></i></a>
             </div>
             <div class="footer-text">
-                <p>© 2026 Reismart - Masjid AR-RUUM Taji. All rights reserved.</p>
-                <p style="margin-top: 10px;">Ramadhan 1447 H / 2026 M</p>
+                <p>© 2026 Reismart - Masjid AR-RUUM Taji</p>
+                <p>Ramadhan 1447 H / 2026 M</p>
             </div>
         </div>
     </footer>
@@ -1300,7 +1385,7 @@
     <script>
         // DATA TERBARU 1447 H / 2026 M
         
-        // Data Takjil berdasarkan file Excel
+        // Data Takjil
         const takjilData = [
             { no: 1, names: ['Bp. H. Wiyana, S.E.', 'Ibu Hj. Endang Kasino', 'Bp. Koko Yudianto, S.H.', 'Ibu Waji Sunaryo', 'Bp. Nanang Waluya', 'Bp. Gino', 'Ibu Naimah'], period1: '18 Februari 2026', period2: '5 Maret 2026' },
             { no: 2, names: ['Bp. H. Subandiyo, S.Pd.', 'Prof. H. Edy Purwanta, M.Pd', 'Ibu Tri Winarto', 'Ibu Febriantika Wulandari', 'Bp. Purwanto', 'Bp. Habib Murti G.A.', 'Ibu Purwani', 'Bapak Supardi Markamah'], period1: '19 Februari 2026', period2: '6 Maret 2026' },
@@ -1319,7 +1404,7 @@
             { no: 15, names: ['Ibu Sri Yuliati', 'Bp. Joko Santoso', 'Ibu Swarni', 'Ibu Novi Agus', 'Bp. Suwarto', 'Ibu Ita Muji', 'Bp. Suyamto', 'Ibu Linda', 'Bp. Ari Widianto'], period1: '4 Maret 2026', period2: '19 Maret 2026' }
         ];
 
-        // Data Kultum berdasarkan file PDF
+        // Data Kultum
         const cultumData = {
             subuh: [
                 { no: 1, date: '18 Februari 2026', day: 'Rabu', name: 'Bp. Sarbilan' },
@@ -1387,7 +1472,7 @@
             ]
         };
 
-        // Data Piket berdasarkan file PDF
+        // Data Piket
         const piketData = {
             Senin: ['ZIDAN', 'RAFA', 'GALIH', 'ATHA', 'INTAN', 'SHERLY', 'JATI'],
             Selasa: ['ZAKI', 'DAVIN', 'FAREL', 'AGA', 'ELSA', 'SAFA', 'AMANDA', 'AYU'],
@@ -1419,7 +1504,7 @@
             // Show home section
             showSection('home');
 
-            // Background file input handler (hanya untuk admin)
+            // Background file input handler
             document.getElementById('bgFileInput').addEventListener('change', function(e) {
                 const file = e.target.files[0];
                 if (file) {
@@ -1430,6 +1515,14 @@
                     };
                     reader.readAsDataURL(file);
                 }
+            });
+
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('.nav-list a').forEach(link => {
+                link.addEventListener('click', () => {
+                    document.getElementById('hamburger').classList.remove('active');
+                    document.getElementById('navMenu').classList.remove('active');
+                });
             });
         });
 
@@ -1479,7 +1572,7 @@
             // Update active nav link
             document.querySelectorAll('.nav-list a').forEach(link => {
                 link.classList.remove('active');
-                if (link.getAttribute('onclick').includes(sectionId)) {
+                if (link.getAttribute('onclick') && link.getAttribute('onclick').includes(sectionId)) {
                     link.classList.add('active');
                 }
             });
@@ -1545,21 +1638,14 @@
             let found = false;
 
             takjilData.forEach(item => {
-                const matchingNames = item.names.filter(name => 
-                    name.toLowerCase().includes(searchTerm)
-                );
-
-                if (matchingNames.length > 0) {
+                // Search by date (period1 and period2)
+                if (item.period1.toLowerCase().includes(searchTerm) || item.period2.toLowerCase().includes(searchTerm)) {
                     found = true;
                     html += `<tr>
                         <td>${item.no}</td>
-                        <td>${item.names.map(name => 
-                            name.toLowerCase().includes(searchTerm) 
-                                ? `<span class="highlight">${name}</span>` 
-                                : name
-                        ).join('<br>')}</td>
-                        <td>${item.period1}</td>
-                        <td>${item.period2}</td>
+                        <td>${item.names.join('<br>')}</td>
+                        <td><span class="highlight">${item.period1}</span></td>
+                        <td><span class="highlight">${item.period2}</span></td>
                     </tr>`;
                 }
             });
@@ -1569,7 +1655,7 @@
             noResults.style.display = found ? 'none' : 'block';
         }
 
-        // Sahur Search Function
+        // Sahur Search Function - Search by Date
         function searchSahur() {
             const input = document.getElementById('sahurSearch');
             const filter = input.value.toUpperCase();
@@ -1578,20 +1664,16 @@
             const noResults = document.getElementById('sahurNoResults');
             let found = false;
 
-            // Loop through all table rows, starting from index 1 to skip header
             for (let i = 1; i < tr.length; i++) {
                 const td = tr[i].getElementsByTagName('td');
                 let rowContainsFilter = false;
                 
-                // Check each column (0=NO, 1=NAMA, 2=TANGGAL, 3=HARI, 4=NOMOR HP)
-                for (let j = 0; j < td.length - 1; j++) { // Skip the last column (NOMOR HP) from search
-                    if (td[j]) {
-                        const txtValue = td[j].textContent || td[j].innerText;
-                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                            rowContainsFilter = true;
-                            found = true;
-                            break;
-                        }
+                // Search only in TANGGAL column (index 2)
+                if (td[2]) {
+                    const txtValue = td[2].textContent || td[2].innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        rowContainsFilter = true;
+                        found = true;
                     }
                 }
                 
@@ -1632,16 +1714,20 @@
 
             const subuhCard = document.querySelector('#cultumSubuhList').closest('.cultum-card');
             const tarawihCard = document.querySelector('#cultumTarawihList').closest('.cultum-card');
+            const noResults = document.getElementById('cultumNoResults');
 
             if (type === 'subuh') {
                 tarawihCard.style.display = 'none';
                 subuhCard.style.display = 'block';
+                noResults.style.display = 'none';
             } else if (type === 'tarawih') {
                 subuhCard.style.display = 'none';
                 tarawihCard.style.display = 'block';
+                noResults.style.display = 'none';
             } else {
                 subuhCard.style.display = 'block';
                 tarawihCard.style.display = 'block';
+                noResults.style.display = 'none';
             }
         }
 
@@ -1649,29 +1735,37 @@
             const searchTerm = document.getElementById('cultumSearch').value.toLowerCase();
             const subuhList = document.getElementById('cultumSubuhList');
             const tarawihList = document.getElementById('cultumTarawihList');
+            const noResults = document.getElementById('cultumNoResults');
 
             if (searchTerm.length < 2) {
                 loadCultumData();
+                noResults.style.display = 'none';
                 return;
             }
 
-            // Filter subuh
+            // Filter subuh by date
             let subuhHtml = '';
+            let subuhFound = false;
             cultumData.subuh.forEach(item => {
-                if (item.name.toLowerCase().includes(searchTerm)) {
-                    subuhHtml += `<li><strong>${item.date}</strong> (${item.day}) - <span class="highlight">${item.name}</span></li>`;
+                if (item.date.toLowerCase().includes(searchTerm)) {
+                    subuhFound = true;
+                    subuhHtml += `<li><strong><span class="highlight">${item.date}</span></strong> (${item.day}) - ${item.name}</li>`;
                 }
             });
             subuhList.innerHTML = subuhHtml || '<li>Tidak ada hasil</li>';
 
-            // Filter tarawih
+            // Filter tarawih by date
             let tarawihHtml = '';
+            let tarawihFound = false;
             cultumData.tarawih.forEach(item => {
-                if (item.name.toLowerCase().includes(searchTerm)) {
-                    tarawihHtml += `<li><strong>${item.date}</strong> (${item.day}) - <span class="highlight">${item.name}</span></li>`;
+                if (item.date.toLowerCase().includes(searchTerm)) {
+                    tarawihFound = true;
+                    tarawihHtml += `<li><strong><span class="highlight">${item.date}</span></strong> (${item.day}) - ${item.name}</li>`;
                 }
             });
             tarawihList.innerHTML = tarawihHtml || '<li>Tidak ada hasil</li>';
+
+            noResults.style.display = (subuhFound || tarawihFound) ? 'none' : 'block';
         }
 
         // Piket Functions
@@ -1705,19 +1799,12 @@
             let found = false;
 
             Object.keys(piketData).forEach(hari => {
-                const matchingMembers = piketData[hari].filter(member => 
-                    member.toLowerCase().includes(searchTerm)
-                );
-
-                if (matchingMembers.length > 0) {
+                // Search by day/hari
+                if (hari.toLowerCase().includes(searchTerm)) {
                     found = true;
                     html += `<tr>
-                        <td><strong>${hari}</strong></td>
-                        <td>${piketData[hari].map(member => 
-                            member.toLowerCase().includes(searchTerm) 
-                                ? `<span class="highlight">${member}</span>` 
-                                : member
-                        ).join(' • ')}</td>
+                        <td><strong><span class="highlight">${hari}</span></strong></td>
+                        <td>${piketData[hari].join(' • ')}</td>
                     </tr>`;
                 }
             });
@@ -1750,7 +1837,7 @@
         document.addEventListener('click', function(event) {
             const adminMenu = document.getElementById('adminMenu');
             const adminToggle = document.querySelector('.admin-toggle');
-            if (!adminToggle.contains(event.target) && !adminMenu.contains(event.target)) {
+            if (adminToggle && adminMenu && !adminToggle.contains(event.target) && !adminMenu.contains(event.target)) {
                 adminMenu.classList.remove('active');
             }
         });
